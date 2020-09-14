@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>SNY 37</h2>
+
+<p>SNY 37 is <span id="days"></span> days, <span id="hours"></span> hours, <span id="mins"></span> minutes, and <span id="secs"></span> seconds away.</p>
+
+
+ <svg width="400" height="100">
+  <rect width="365" height="50" style="fill:rgb(255,255,255);stroke-width:3;stroke:rgb(0,0,0)" />
+
+  <rect id="rect2" width="0" height="40" x="0" y="5" style="fill:rgb(0,0,255);stroke-width:0;stroke:rgb(0,0,0)" />
+
+  <line x1="31" y1="0" x2="31" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="59" y1="0" x2="59" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="90" y1="0" x2="90" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="120" y1="0" x2="120" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="151" y1="0" x2="151" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="181" y1="0" x2="181" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="212" y1="0" x2="212" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="243" y1="0" x2="243" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="273" y1="0" x2="273" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="304" y1="0" x2="304" y2="50" style="stroke:black;stroke-width:1" />
+  <line x1="334" y1="0" x2="334" y2="50" style="stroke:black;stroke-width:1" />
+  <text x="15" y="65" transform="rotate(45 15 60)">Jan</text>
+  <text x="45" y="65" transform="rotate(45 45 60)">Feb</text>
+  <text x="75" y="65" transform="rotate(45 75 60)">Mar</text>
+  <text x="105" y="65" transform="rotate(45 105 60)">Apr</text>
+  <text x="135" y="65" transform="rotate(45 135 60)">May</text>
+  <text x="165" y="65" transform="rotate(45 165 60)">Jun</text>
+  <text x="196" y="65" transform="rotate(45 196 60)">Jul</text>
+  <text x="227" y="65" transform="rotate(45 227 60)">Aug</text>
+  <text x="258" y="65" transform="rotate(45 258 60)">Sep</text>
+  <text x="288" y="65" transform="rotate(45 288 60)">Oct</text>
+  <text x="319" y="65" transform="rotate(45 319 60)">Nov</text>
+  <text x="349" y="65" transform="rotate(45 349 60)">Dec</text>
+
+</svg> 
+
+
+<script>
+var timer = setInterval(updateTime, 1000);
+
+function updateTime() {
+    var d1 = new Date();
+    var d2 = new Date(2020, 11, 26, 12);
+    var d3 = Math.trunc((d2-d1)/(1000*60*60*24));
+    var d4 = Math.trunc((d2-d1)/(1000*60*60)) - d3*24;
+    var d5 = Math.trunc((d2-d1)/(1000*60)) - d3*24*60 - d4*60;
+    var d6 = Math.round((d2-d1)/1000) - d3*24*60*60 - d4*60*60 - d5*60;
+    document.getElementById("days").innerHTML = d3;
+    document.getElementById("hours").innerHTML = d4;
+    document.getElementById("mins").innerHTML = d5;
+    document.getElementById("secs").innerHTML = d6;
+}
+
+var d7 = new Date();
+var d8 = new Date(2020, 0, 1, 0);
+var d9 = Math.round((d7-d8)/(1000*60*60*24));
+document.getElementById("rect2").setAttribute("width", d9);
+
+
+</script>
+
+</body>
+</html>
