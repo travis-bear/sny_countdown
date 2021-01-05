@@ -2,9 +2,9 @@
 <html>
 <body>
 
-<h2>SNY 37</h2>
+<h2>SNY <span id="sny1"></span></h2>
 
-<p>SNY 37 is <span id="days"></span> days, <span id="hours"></span> hours, <span id="mins"></span> minutes, and <span id="secs"></span> seconds away.</p>
+<div id="time_until">SNY <span id="sny2"></span> is <span id="days"></span> days, <span id="hours"></span> hours, <span id="mins"></span> minutes, and <span id="secs"></span> seconds away.</div>
 
 
  <svg width="400" height="100">
@@ -40,26 +40,35 @@
 
 
 <script>
-var timer = setInterval(updateTime, 1000);
+// The following will be processed on load
+var today = new Date();
+var year = today.getFullYear();
+var sny_year = year - 1983;
+var jan1 = new Date(year, 0, 1, 0);
+var nextJan1 = new Date(year+1, 0, 1, 0);
+var timesincejan1 = Math.round((today-jan1)/(1000*60*60*24));
+document.getElementById("rect2").setAttribute("width", timesincejan1);
+document.getElementById("sny1").innerHTML = sny_year;
+document.getElementById("sny2").innerHTML = sny_year;
 
 function updateTime() {
-    var d1 = new Date();
-    var d2 = new Date(2020, 11, 26, 12);
-    var d3 = Math.trunc((d2-d1)/(1000*60*60*24));
-    var d4 = Math.trunc((d2-d1)/(1000*60*60)) - d3*24;
-    var d5 = Math.trunc((d2-d1)/(1000*60)) - d3*24*60 - d4*60;
-    var d6 = Math.round((d2-d1)/1000) - d3*24*60*60 - d4*60*60 - d5*60;
-    document.getElementById("days").innerHTML = d3;
-    document.getElementById("hours").innerHTML = d4;
-    document.getElementById("mins").innerHTML = d5;
-    document.getElementById("secs").innerHTML = d6;
+	var now = new Date();
+    var sny_start = new Date(year, 11, 26, 12);
+    var days = Math.trunc((sny_start-now)/(1000*60*60*24));
+    var hours = Math.trunc((sny_start-now)/(1000*60*60)) - days*24;
+    var mins = Math.trunc((sny_start-now)/(1000*60)) - days*24*60 - hours*60;
+    var secs = Math.round((sny_start-now)/1000) - days*24*60*60 - hours*60*60 - mins*60;
+	if (now > sny_start && now < nextJan1) {
+    	document.getElementById("time_until").innerHTML = "SNY is now!!!";
+	} else {
+	    document.getElementById("days").innerHTML = days;
+	    document.getElementById("hours").innerHTML = hours;
+    	document.getElementById("mins").innerHTML = mins;
+    	document.getElementById("secs").innerHTML = secs;
+    }
 }
 
-var d7 = new Date();
-var d8 = new Date(2020, 0, 1, 0);
-var d9 = Math.round((d7-d8)/(1000*60*60*24));
-document.getElementById("rect2").setAttribute("width", d9);
-
+var timer = setInterval(updateTime, 1000); // calls updateTime every second
 
 </script>
 
